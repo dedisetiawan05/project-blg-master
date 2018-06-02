@@ -1,16 +1,12 @@
-@extends('layouts.visitor-layout')
-@section('style-css')
+@extends('layouts.templetesingle')
+<!-- @section('style-css')
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/bootstrap/css/bootstrap.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/bootstrap/css/bootstrap.min.css')}}">
 <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.js')}}"></script>
 <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-@endsection
-
+@endsection -->
 @section('content')
 <!-- Post Content Column -->
-<div class="clearfix"></div>
-
-<div class="col-md-8 col-sm-8 col-xs-8" style="font-size: larger;">
 
   <!-- Title -->
   <h1 class="mt-4">{{$data->title}}</h1>
@@ -29,7 +25,7 @@
   <hr>
 
   <!-- Preview Image -->
-  <img class="img-fluid rounded" src="{{URL::asset('images/post'.$data->image)}}" alt="No Gambar">
+  <img class="img-fluid rounded" src="{{URL::to('images/'.$data->image)}}" style="height: 200px; width:200px;" alt="No Gambar">
 
   <hr>
 
@@ -39,31 +35,52 @@
   <hr>
 
   <!-- Comments Form -->
-  <div class="card my-4">
+  <div class="card my-4" style="border:0px;">
     <h5 class="card-header">Leave a Comment:</h5>
     <div class="card-body">
-      <form>
+      <form action="/comment" method="post">
+        {{csrf_field()}}
         <div class="form-group">
-          <textarea class="form-control" rows="3"></textarea>
+          <label>
+            Name
+          </label>
+          <input type="text" class="form-control" name="name" placeholder="Enter Your Name Here!">
         </div>
+        <div class="form-group">
+          <label>
+            Comment
+          </label>
+          <textarea class="form-control" name="comment" rows="3" placeholder="Place Your Comment Here"></textarea>
+        </div>
+        <input type="hidden" name="post_id" value="{{$data->id}}">
         <button type="button" class="btn btn-danger" onclick="self.history.back();">Back</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="Submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
   </div>
-
-  <!-- Single Comment -->
-  <div class="media mb-4">
-    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-    <div class="media-body">
-      <h5 class="mt-0">Commenter Name</h5>
-      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-    </div>
-  </div>
-</div>
-
-</div>
-</div>
-
-</div>
-@stop
+  <hr>
+  @foreach ($data->comments()->get() as $comment)
+        <div class="card mb-4" style="border: 0px;">
+            <div class="card-body">
+              <div class="card-title">
+                <h4 class="mt-0">{{ $comment->nama }}</h4>
+                <hr>
+              </div>
+              <p class="card-text">
+                {{ $comment->comment }}
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+          <!-- untuk admin bisa hapus visitor tidak bisa masuk -->
+              @if (Route::has('login'))
+                @auth
+                  <a href="{{ url('admin/deleteone/'.$comment->id)}}">
+                    <button type="button" class="btn pull-right"><li class="fa fa-trash"></li></button>
+                  </a>
+              @else
+                  tidak bisa menghapus
+              @endauth
+              @endif
+        </div>
+  @endforeach
+@endsection

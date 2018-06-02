@@ -11,15 +11,17 @@
 |
 */
 Route::resource('/', 'VisitorController');
-
-Route::post('/comment', 'CommentController@store');
-
+//untuk komentari
 Route::get('/post/{id}', 'VisitorController@showPage');
+//untuk proses penyimpanan database komentar
+Route::post('/comment', 'VisitorController@store');
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
 {
 	Route::resource('/post','PostController');
 	Route::post('/delete','PostController@destroyall');
+	Route::post('/deletecomment','CommentController@destroyall');
+	Route::get('/deleteone/{id}','CommentController@destroyone');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/comment','CommentController@index');   
 });

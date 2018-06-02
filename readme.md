@@ -10,25 +10,24 @@
 o Tambahkan Fungsi Komentar
 =============================   
    Admin  
-   + Lihat Semua Komentar
-   + Delete Komentar
+   + Lihat Semua Komentar - sudah
+   + Delete Komentar - sudah
 
    Page
-   + Tambah Komentar Post
-   + Delete Komentar Post
+   + Tambah Komentar Post - sudah
+   + Delete Komentar Post ->untuk admin - sudah
 
-Note : Delete komentar di postingan hanya bisa dilihat oleh admin saja.
+Note : Delete komentar di postingan hanya bisa dilihat oleh admin saja. - sudah
 
 
 o Layout Visitor
 =============================
-- Ubah layout postingan semenarik mungkin.
-- Hilangkan Nav Bar Login dan Register di halaman depan.
-- Tambahkan Fungsi Pagination di post visitor.
+- Ubah layout postingan semenarik mungkin. - sudah
+- Hilangkan Nav Bar Login dan Register di halaman depan. -sudah
+- Tambahkan Fungsi Pagination di post visitor. - sudah
 
-Note : Bug gambar tidak tampil
+Note : Bug gambar tidak tampil - sudah
 
 
 o Cari Bug dan Perbaiki.
 ============================
-

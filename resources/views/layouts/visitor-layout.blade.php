@@ -79,7 +79,7 @@
     </style>
 </head>
 <body>
-    <div class="flex-center position-ref full-height">
+    <div class="container">
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -90,7 +90,7 @@
             @endauth
         </div>
         @endif
-
+    </div>
         <!-- Page Content -->
         <div class="container">
 

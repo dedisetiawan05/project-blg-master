@@ -30,7 +30,7 @@
                                  </tr>   
                                 </thead>
                                  <tbody>
-                                    <form id="destroy-all" action="{{ url('admin/delete') }}" method="POST"> {{ csrf_field() }} 
+                                    <form id="destroy-all" action="{{ url('admin/deletecomment') }}" method="POST"> {{ csrf_field() }} 
                                     @foreach($data as $comments)
                                      <tr>
                                          <td class="col-md-1 ">

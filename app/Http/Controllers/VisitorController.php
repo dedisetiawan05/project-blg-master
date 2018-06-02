@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Comment;
 use DB;
+use Session;
 
 class VisitorController extends Controller
 {
@@ -39,6 +41,12 @@ class VisitorController extends Controller
     public function store(Request $request)
     {
         //
+        $nama = $request->get('name');
+        $komentar = $request->get('comment');
+        $data= $request->get('post_id');
+        DB::insert('insert into comments(nama, comment,post_id) values (?, ?,?)', [$nama, $komentar,$data]);
+        Session::flash('succes','comment was added');
+        return redirect()->back();
     }
 
     /**
